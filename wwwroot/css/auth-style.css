@@ -1,0 +1,117 @@
+﻿/* Стили для страниц авторизации */
+.auth-body {
+    background: linear-gradient(135deg, #f5e6e8 0%, #e8d5d8 50%, #d4b5b9 100%);
+    min-height: 100vh;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.auth-container {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.auth-card {
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 20px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+    padding: 40px;
+    width: 100%;
+    max-width: 400px;
+    backdrop-filter: blur(10px);
+}
+
+.auth-title {
+    color: #8B4B5C;
+    font-size: 28px;
+    font-weight: 600;
+    text-align: center;
+    margin-bottom: 30px;
+    letter-spacing: 1px;
+}
+
+.auth-label {
+    color: #8B4B5C;
+    font-weight: 500;
+    margin-bottom: 8px;
+    display: block;
+    font-size: 14px;
+}
+
+.auth-input {
+    width: 100%;
+    padding: 12px 16px;
+    border: 2px solid #e8d5d8;
+    border-radius: 8px;
+    font-size: 16px;
+    background: rgba(255, 255, 255, 0.8);
+    transition: all 0.3s ease;
+    margin-bottom: 20px;
+}
+
+    .auth-input:focus {
+        outline: none;
+        border-color: #8B4B5C;
+        background: rgba(255, 255, 255, 1);
+        box-shadow: 0 0 0 3px rgba(139, 75, 92, 0.1);
+    }
+
+.auth-btn {
+    width: 100%;
+    padding: 14px;
+    background: linear-gradient(135deg, #8B4B5C 0%, #A0566B 100%);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-bottom: 15px;
+    letter-spacing: 0.5px;
+}
+
+    .auth-btn:hover {
+        background: linear-gradient(135deg, #A0566B 0%, #8B4B5C 100%);
+        transform: translateY(-2px);
+        box-shadow: 0 8px 20px rgba(139, 75, 92, 0.3);
+    }
+
+.auth-link {
+    color: #8B4B5C;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+    .auth-link:hover {
+        color: #A0566B;
+        text-decoration: underline;
+    }
+
+.auth-text {
+    text-align: center;
+    color: #666;
+    margin-top: 20px;
+    font-size: 14px;
+}
+
+.error-message {
+    background: rgba(220, 53, 69, 0.1);
+    color: #dc3545;
+    padding: 10px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    border-left: 4px solid #dc3545;
+}
+
+.success-message {
+    background: rgba(40, 167, 69, 0.1);
+    color: #28a745;
+    padding: 10px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    border-left: 4px solid #28a745;
+}

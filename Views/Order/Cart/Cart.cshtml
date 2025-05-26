@@ -1,0 +1,70 @@
+﻿@model OfficeStore.Models.Order
+@{
+    ViewData["Title"] = "Корзина";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+@if (TempData["Success"] != null)
+{
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        @TempData["Success"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+}
+
+@if (TempData["Error"] != null)
+{
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        @TempData["Error"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+}
+
+@if (Model.OrderDetails.Any())
+{
+    <div class="table-responsive">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Товар</th>
+                    <th>Цена</th>
+                    <th>Количество</th>
+                    <th>Сумма</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.OrderDetails)
+                {
+                    <tr>
+                        <td>@item.Product.Name</td>
+                        <td>@item.UnitPrice.ToString("C")</td>
+                        <td>@item.Quantity</td>
+                        <td>@((item.Quantity * item.UnitPrice).ToString("C"))</td>
+                    </tr>
+                }
+            </tbody>
+            <tfoot>
+                <tr>
+                    <th colspan="3">Итого:</th>
+                    <th>@Model.TotalAmount.ToString("C")</th>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+
+    <div class="d-flex justify-content-between mt-3">
+        <a asp-controller="Product" asp-action="Index" class="btn btn-secondary">Продолжить покупки</a>
+        <form asp-action="PlaceOrder" method="post" class="d-inline">
+            <button type="submit" class="btn btn-success">Оформить заказ</button>
+        </form>
+    </div>
+}
+else
+{
+    <div class="alert alert-info">
+        <h4>Корзина пуста</h4>
+        <p>Добавьте товары в корзину, чтобы оформить заказ.</p>
+        <a asp-controller="Product" asp-action="Index" class="btn btn-primary">Перейти к товарам</a>
+    </div>
+}

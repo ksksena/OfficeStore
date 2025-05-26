@@ -1,0 +1,30 @@
+﻿@model OfficeStore.Models.Product
+@{
+    ViewData["Title"] = "Удалить товар";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<h3>Вы уверены, что хотите удалить этот товар?</h3>
+<div class="alert alert-warning">
+    <h4>@Html.DisplayFor(model => model.Name)</h4>
+    <dl class="row">
+        <dt class="col-sm-3">Описание:</dt>
+        <dd class="col-sm-9">@Html.DisplayFor(model => model.Description)</dd>
+
+        <dt class="col-sm-3">Цена:</dt>
+        <dd class="col-sm-9">@Html.DisplayFor(model => model.Price) ₽</dd>
+
+        <dt class="col-sm-3">Остаток:</dt>
+        <dd class="col-sm-9">@Html.DisplayFor(model => model.Stock) шт.</dd>
+
+        <dt class="col-sm-3">Поставщик:</dt>
+        <dd class="col-sm-9">@Html.DisplayFor(model => model.Supplier.Name)</dd>
+    </dl>
+</div>
+
+<form asp-action="DeleteProduct">
+    <input type="hidden" asp-for="Id" />
+    <input type="submit" value="Удалить" class="btn btn-danger" />
+    <a asp-action="Products" class="btn btn-secondary">Назад к списку</a>
+</form>

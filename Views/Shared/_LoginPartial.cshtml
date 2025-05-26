@@ -1,0 +1,43 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using OfficeStore.Models
+@inject SignInManager<User> SignInManager
+@inject UserManager<User> UserManager
+
+<ul class="navbar-nav">
+    @if (SignInManager.IsSignedIn(User))
+    {
+        <li class="nav-item">
+            <span class="nav-link text-dark">
+                <i class="fas fa-user"></i> Привет, @UserManager.GetUserAsync(User).Result?.FirstName!
+            </span>
+        </li>
+        @if (User.IsInRole("Administrator"))
+        {
+            <li class="nav-item">
+                <a class="nav-link text-dark" asp-controller="Admin" asp-action="Index">
+                </a>
+            </li>
+        }
+
+        <li class="nav-item">
+            <form asp-controller="Account" asp-action="Logout" method="post" class="form-inline">
+                <button type="submit" class="nav-link btn btn-link text-dark">
+                    <i class="fas fa-sign-out-alt"></i> Выход
+                </button>
+            </form>
+        </li>
+    }
+    else
+    {
+        <li class="nav-item">
+            <a class="nav-link text-dark" asp-controller="Account" asp-action="Register">
+                <i class="fas fa-user-plus"></i> Регистрация
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-dark" asp-controller="Account" asp-action="Login">
+                <i class="fas fa-sign-in-alt"></i> Вход
+            </a>
+        </li>
+    }
+</ul>

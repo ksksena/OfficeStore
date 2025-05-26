@@ -1,0 +1,138 @@
+/* Основные стили приложения */
+:root {
+    --primary-color: #8B4B5C;
+    --secondary-color: #A0566B;
+    --background-gradient: linear-gradient(135deg, #f5e6e8 0%, #e8d5d8 50%, #d4b5b9 100%);
+    --card-background: rgba(255, 255, 255, 0.95);
+}
+
+body {
+    background: var(--background-gradient);
+    min-height: 100vh;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.navbar {
+    background: var(--card-background) !important;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+    border: none !important;
+}
+
+.navbar-brand {
+    color: var(--primary-color) !important;
+    font-weight: 600;
+    font-size: 1.5rem;
+}
+
+.nav-link {
+    color: var(--primary-color) !important;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+    .nav-link:hover {
+        color: var(--secondary-color) !important;
+        transform: translateY(-1px);
+    }
+
+.card {
+    background: var(--card-background);
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(10px);
+}
+
+.card-header {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: white;
+    border-radius: 15px 15px 0 0 !important;
+    border: none;
+    font-weight: 600;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    border: none;
+    border-radius: 8px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+    .btn-primary:hover {
+        background: linear-gradient(135deg, var(--secondary-color), var(--primary-color));
+        transform: translateY(-2px);
+        box-shadow: 0 8px 20px rgba(139, 75, 92, 0.3);
+    }
+
+.btn-success {
+    background: linear-gradient(135deg, #28a745, #20c997);
+    border: none;
+    border-radius: 8px;
+    font-weight: 500;
+}
+
+.btn-danger {
+    background: linear-gradient(135deg, #dc3545, #e83e8c);
+    border: none;
+    border-radius: 8px;
+    font-weight: 500;
+}
+
+.table {
+    background: white;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+    .table thead th {
+        background: var(--primary-color);
+        color: white;
+        border: none;
+        font-weight: 500;
+    }
+
+.form-control {
+    border: 2px solid #e8d5d8;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+    .form-control:focus {
+        border-color: var(--primary-color);
+        box-shadow: 0 0 0 3px rgba(139, 75, 92, 0.1);
+    }
+
+.alert-success {
+    background: rgba(40, 167, 69, 0.1);
+    border: 1px solid rgba(40, 167, 69, 0.2);
+    border-radius: 10px;
+    color: #155724;
+}
+
+.alert-danger {
+    background: rgba(220, 53, 69, 0.1);
+    border: 1px solid rgba(220, 53, 69, 0.2);
+    border-radius: 10px;
+    color: #721c24;
+}
+
+.container {
+    background: transparent;
+}
+
+h1, h2, h3, h4, h5 {
+    color: var(--primary-color);
+    font-weight: 600;
+}
+
+.text-success {
+    color: #28a745 !important;
+    font-weight: 600;
+}
+
+.badge {
+    border-radius: 20px;
+    font-weight: 500;
+}

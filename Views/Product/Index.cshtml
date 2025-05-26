@@ -1,0 +1,105 @@
+﻿@model IEnumerable<OfficeStore.Models.Product>
+
+@{
+    ViewData["Title"] = "Каталог товаров";
+}
+
+<h1>Каталог товаров</h1>
+
+@if (ViewData["Error"] != null)
+{
+    <div class="alert alert-danger">
+        @ViewData["Error"]
+    </div>
+}
+
+@if (TempData["Success"] != null)
+{
+    <div class="alert alert-success">
+        @TempData["Success"]
+    </div>
+}
+
+<!-- Поиск -->
+<div class="row mb-3">
+    <div class="col-md-6">
+        <form asp-action="Index" method="get">
+            <div class="input-group">
+                <input type="text" name="searchString" class="form-control"
+                       placeholder="Поиск товаров..."
+                       value="@ViewData["CurrentFilter"]">
+                <button class="btn btn-primary" type="submit">Найти</button>
+                @if (!String.IsNullOrEmpty(ViewData["CurrentFilter"] as string))
+                {
+                    <a asp-action="Index" class="btn btn-secondary">Сбросить</a>
+                }
+            </div>
+        </form>
+    </div>
+    <div class="col-md-6">
+        <div class="btn-group">
+            <a asp-action="Index" asp-route-sortOrder="" asp-route-currentFilter="@ViewData["CurrentFilter"]"
+               class="btn btn-outline-secondary">По названию ↑</a>
+            <a asp-action="Index" asp-route-sortOrder="price" asp-route-currentFilter="@ViewData["CurrentFilter"]"
+               class="btn btn-outline-secondary">По цене ↑</a>
+            <a asp-action="Index" asp-route-sortOrder="price_desc" asp-route-currentFilter="@ViewData["CurrentFilter"]"
+               class="btn btn-outline-secondary">По цене ↓</a>
+        </div>
+    </div>
+</div>
+
+<!-- Список товаров -->
+<div class="row">
+    @if (Model.Any())
+    {
+        @foreach (var item in Model)
+        {
+            <div class="col-md-4 mb-3">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">@item.Name</h5>
+                        <p class="card-text">@item.Description</p>
+                        <p class="text-success"><strong>@item.Price.ToString("C")</strong></p>
+                        <p class="text-muted">Остаток: @item.Stock шт.</p>
+                        <p class="text-muted">Поставщик: @item.Supplier.Name</p>
+
+                        <div class="btn-group-vertical d-grid gap-2">
+                            <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-info btn-sm">Подробнее</a>
+
+                            @if (User.IsInRole("Administrator"))
+                            {
+                                <a asp-controller="Admin" asp-action="EditProduct" asp-route-id="@item.Id"
+                                   class="btn btn-primary btn-sm">Изменить</a>
+                                <a asp-controller="Admin" asp-action="DeleteProduct" asp-route-id="@item.Id"
+                                   class="btn btn-danger btn-sm">Удалить</a>
+                            }
+                            else if (User.Identity.IsAuthenticated)
+                            {
+                                <form asp-controller="Order" asp-action="BuyNow" method="post">
+                                    <input type="hidden" name="productId" value="@item.Id" />
+                                    <input type="hidden" name="quantity" value="1" />
+                                    <button type="submit" class="btn btn-success btn-sm w-100" @(item.Stock == 0 ? "disabled" : "")>
+                                        @(item.Stock == 0 ? "Нет в наличии" : "Купить сейчас")
+                                    </button>
+                                </form>
+                            }
+                            else
+                            {
+                                <a asp-controller="Account" asp-action="Login" class="btn btn-primary btn-sm">Войти для покупки</a>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    }
+    else
+    {
+        <div class="col-12">
+            <div class="alert alert-info">
+                <h4>Товары не найдены</h4>
+                <p>В каталоге пока нет товаров или по вашему запросу ничего не найдено.</p>
+            </div>
+        </div>
+    }
+</div>

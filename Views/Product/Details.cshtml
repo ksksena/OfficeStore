@@ -1,0 +1,45 @@
+﻿@model OfficeStore.Models.Product
+
+@{
+    ViewData["Title"] = Model.Name;
+}
+
+<h1>@Model.Name</h1>
+
+<div class="row">
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-body">
+                <h3 class="text-success">@Model.Price.ToString("C")</h3>
+                <p><strong>Описание:</strong> @Model.Description</p>
+                <p><strong>В наличии:</strong> @Model.Stock шт.</p>
+                <p><strong>Поставщик:</strong> @Model.Supplier.Name</p>
+
+                @if (User.Identity.IsAuthenticated && !User.IsInRole("Administrator"))
+                {
+                    <form asp-controller="Order" asp-action="BuyNow" method="post">
+                        <input type="hidden" name="productId" value="@Model.Id" />
+                        <div class="row mb-3">
+                            <div class="col-md-3">
+                                <label>Количество:</label>
+                                <input type="number" name="quantity" value="1" min="1" max="@Model.Stock"
+                                       class="form-control" @(Model.Stock == 0 ? "disabled" : "") />
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-success" @(Model.Stock == 0 ? "disabled" : "")>
+                            @(Model.Stock == 0 ? "Нет в наличии" : "Купить сейчас")
+                        </button>
+                    </form>
+                }
+                else if (!User.Identity.IsAuthenticated)
+                {
+                    <a asp-controller="Account" asp-action="Login" class="btn btn-primary">Войти для покупки</a>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="mt-3">
+    <a asp-action="Index" class="btn btn-secondary">Назад к каталогу</a>
+</div>

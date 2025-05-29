@@ -12,8 +12,8 @@ using OfficeStore.Data;
 namespace OfficeStore.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250526132230_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20250529065015_Test4")]
+    partial class Test4
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -222,7 +222,8 @@ namespace OfficeStore.Migrations
 
                     b.Property<string>("Description")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
 
                     b.Property<string>("Name")
                         .IsRequired()

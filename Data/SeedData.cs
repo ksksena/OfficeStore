@@ -16,14 +16,14 @@ namespace OfficeStore.Data
             {
                 var admin = new User
                 {
-                    UserName = "admin",
-                    Email = "admin",
+                    UserName = "admin@office.com",
+                    Email = "admin@office.com",
                     FirstName = "Админ",
                     LastName = "Системы",
                     EmailConfirmed = true
                 };
 
-                // ВАЖНО: Проверяем результат создания пользователя
+                //  Проверяем результат создания пользователя
                 var createResult = await userManager.CreateAsync(admin, "Admin123!");
 
                 if (createResult.Succeeded)
@@ -41,7 +41,6 @@ namespace OfficeStore.Data
                 }
             }
 
-            // Остальной код остается без изменений
             if (!context.Suppliers.Any())
             {
                 context.Suppliers.AddRange(
